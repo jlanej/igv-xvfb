@@ -1,0 +1,10 @@
+new
+genome hg38
+snapshotDirectory /output/
+maxPanelHeight 5000
+load /dataDir/a.vcf.gz,/dataDir/a.bam
+goto chr4:6716254-6716454
+squish
+expand Gene
+snapshot example.png
+exit
