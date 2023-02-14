@@ -15,7 +15,7 @@ WORKDIR /igv
 ADD https://api.github.com/repos/PankratzLab/igv-xvfb/git/refs/heads/main version.json
 
 RUN git clone https://github.com/PankratzLab/igv-xvfb.git
-RUN chmod +x /igv/make_igv_snapshots.sh 
+RUN chmod +x make_igv_snapshots.sh 
 
 RUN wget https://data.broadinstitute.org/igv/projects/downloads/2.16/IGV_Linux_2.16.0_WithJava.zip
 RUN unzip IGV_Linux_2.16.0_WithJava.zip
