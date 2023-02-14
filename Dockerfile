@@ -1,7 +1,6 @@
 FROM ubuntu:latest
-# docker build -t igv-vm:latest .
+# docker build -t igv-xvfb:latest .
 
-WORKDIR /igv
 RUN apt-get update 
 RUN apt-get install -yq \
 	wget \
@@ -10,11 +9,16 @@ RUN apt-get install -yq \
 	xvfb \
 	openjdk-11-jdk \
 	fontconfig \
-	git \
+	git
+
+WORKDIR /igv
+ADD https://api.github.com/repos/PankratzLab/igv-xvfb/git/refs/heads/main version.json
 
 RUN git clone https://github.com/PankratzLab/igv-xvfb.git
-RUN wget https://data.broadinstitute.org/igv/projects/downloads/2.10/IGV_Linux_2.10.3_WithJava.zip
-RUN unzip IGV_Linux_2.10.3_WithJava.zip
+RUN chmod +x /igv/make_igv_snapshots.sh 
 
-# Set the Xvfb bash script as the entry point.
-ENTRYPOINT ["/igv/run-xvfb-igv.sh"]
+RUN wget https://data.broadinstitute.org/igv/projects/downloads/2.16/IGV_Linux_2.16.0_WithJava.zip
+RUN unzip IGV_Linux_2.16.0_WithJava.zip
+
+WORKDIR /igv/IGV_Linux_2.16.0
+CMD ["/bin/bash"]
